@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Концепт</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body class="enter">
+        <a href="index.html">
+            <button class="back">
+                <img src="images/back.svg" alt="back arrow" />
+            </button>
+        </a>
+
+        <div>
+            <h1>Вход</h1>
+            <form action="/login" method="post">
+                <div>
+                    <label for="login">Имя пользователя:</label>
+                    <input type="text" id="login" name="login" />
+                </div>
+                <div>
+                    <label for="password">Пароль:</label>
+                    <input type="password" id="password" name="password" />
+                </div>
+                <div>
+                    <button type="submit">Вход</button>
+                </div>
+            </form>
+        </div>
+
+        <div>
+            <h1>Регистрация</h1>
+            <form action="/register" method="post">
+                <div>
+                    <label for="reg-login">Имя пользователя:</label>
+                    <input type="text" id="reg-login" name="login" />
+                </div>
+                <div>
+                    <label for="reg-password">Пароль:</label>
+                    <input type="password" id="reg-password" name="password" />
+                </div>
+                <div>
+                    <button type="submit">Зарегистрироваться</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

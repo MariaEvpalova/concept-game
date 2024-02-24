@@ -8,8 +8,21 @@
     src: url('fonts/Mikar.ttf') format('truetype'); /* Path to your .ttf font file */
 }
 
+@font-face {
+    font-family: 'Cruinn'; /* A name to refer to the font by in your CSS */
+    src: url('fonts/Cruinn.ttf') format('truetype'); /* Path to your .ttf font file */
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
 html, body {
+    margin: 0;
     height: 100%;
+    box-sizing: border-box;
+}
+
+body {
+    padding: 12vh 4vw;
 }
 
 body.index {
@@ -40,4 +53,58 @@ h1 {
     display: flex;
     justify-content: space-around;
     gap: 5vw;
+}
+
+body.enter {
+    background-image: url('images/enter-background.svg');
+    display: flex;
+}
+
+.enter h1 {
+    font-size: 64px;
+}
+
+button.back {
+    background-color: transparent;
+    border: none;
+    height: fit-content;
+    margin-right: 48px;
+}
+
+.enter form {
+    margin-right: 10vw;
+}
+
+.enter form > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.enter form label {
+    font-family: 'Cruinn', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.enter form input {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    width: 340px;
+    padding: 20px;
+    border: none;
+    background-color: #F3EFFF;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.enter form button {
+    padding: 16px 32px;
+    width: min-content;
+    border: none;
+    border-radius: 10px;
+    color: #ffffff;
+    background-color: #723DB6;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    margin-top: 20px;
 }
