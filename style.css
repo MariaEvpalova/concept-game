@@ -1,0 +1,43 @@
+@font-face {
+    font-family: 'MakiSans'; /* A name to refer to the font by in your CSS */
+    src: url('fonts/Maki Sans.ttf') format('truetype'); /* Path to your .ttf font file */
+}
+
+@font-face {
+    font-family: 'Mikar'; /* A name to refer to the font by in your CSS */
+    src: url('fonts/Mikar.ttf') format('truetype'); /* Path to your .ttf font file */
+}
+
+html, body {
+    height: 100%;
+}
+
+body.index {
+    background-image: url('images/index-background.svg');
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-family: 'MakiSans', sans-serif;
+    font-size: 150px;
+    font-weight: 500;
+    margin-top: 0;
+}
+
+.index button {
+    font-family: 'Mikar', sans-serif;
+    font-size: 64px;
+    border-style: hidden;
+    background-color: #E5E2F3;
+    border-radius: 10px;
+    padding: 20px 60px;
+}
+
+.index .buttons {
+    display: flex;
+    justify-content: space-around;
+    gap: 5vw;
+}
