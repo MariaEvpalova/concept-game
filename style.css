@@ -1,16 +1,16 @@
 @font-face {
-    font-family: 'MakiSans'; /* A name to refer to the font by in your CSS */
-    src: url('fonts/Maki Sans.ttf') format('truetype'); /* Path to your .ttf font file */
+    font-family: 'MakiSans'; 
+    src: url('fonts/Maki Sans.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'Mikar'; /* A name to refer to the font by in your CSS */
-    src: url('fonts/Mikar.ttf') format('truetype'); /* Path to your .ttf font file */
+    font-family: 'Mikar';
+    src: url('fonts/Mikar.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'Cruinn'; /* A name to refer to the font by in your CSS */
-    src: url('fonts/Cruinn.ttf') format('truetype'); /* Path to your .ttf font file */
+    font-family: 'Cruinn';
+    src: url('fonts/Cruinn.ttf') format('truetype');
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
@@ -107,4 +107,21 @@ button.back {
     font-family: 'Inter', sans-serif;
     font-size: 14px;
     margin-top: 20px;
+}
+
+body.rules {
+    background-image: url('images/rules-background.svg');
+    display: flex;
+}
+
+.rules h1 {
+    font-size: 64px;
+}
+
+.rules p {
+    font-family: 'Mikar', sans-serif;
+    font-size: 36px;
+    background-color: #E5E2F3;
+    padding: 48px;
+    margin-right: 96px;
 }
