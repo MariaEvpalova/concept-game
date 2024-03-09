@@ -135,10 +135,6 @@ async function displayAvailableGames(login, password) {
 
             gameElement.innerHTML = `
                     <div class="data">
-                        <div class="deadline">
-                            <h2>Начало</h2>
-                            <p>${games.startTime[i]}</p>
-                        </div>
                         <div class="difficulty">
                             <h2>Сложность</h2>
                             <p>${games.difficulty[i]}</p>
@@ -146,10 +142,6 @@ async function displayAvailableGames(login, password) {
                         <div class="turnTime">
                             <h2>Продолжительность</h2>
                             <p>${games.duration[i]} мин</p>
-                        </div>
-                        <div class="tries">
-                            <h2>Баллы</h2>
-                            <p>${games.points[i]}</p>
                         </div>
                         <div class="numPlayers">
                             <h2>Игроки</h2>
