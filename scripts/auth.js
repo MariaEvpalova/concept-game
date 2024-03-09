@@ -56,7 +56,7 @@ function loadAuth() {
 
     const newHTMLContent = `
         <a href="index.html">
-            <button class="back">
+            <button id="back">
                 <img src="images/back.svg" alt="back arrow" />
             </button>
         </a>
@@ -100,7 +100,7 @@ function loadAuth() {
 
     document.body.innerHTML = newHTMLContent;
 
-    const backButton = document.querySelector('.back');
+    const backButton = document.getElementById('back');
     backButton.onclick = function () {
         loadMain();
     };

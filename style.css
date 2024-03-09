@@ -65,7 +65,7 @@ body#enter {
     font-size: 64px;
 }
 
-button.back {
+button#back {
     background-color: transparent;
     border: none;
     height: fit-content;

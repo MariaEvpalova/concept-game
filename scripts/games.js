@@ -25,7 +25,9 @@ async function displayUserGames(login, password) {
 
     document
         .getElementById('createGame')
-        .addEventListener('click', () => createGame(login, password));
+        .addEventListener('click', () =>
+            displayCreateGamesPage(login, password)
+        );
 
     document
         .getElementById('logout')
@@ -114,7 +116,9 @@ async function displayAvailableGames(login, password) {
 
     document
         .getElementById('createGame')
-        .addEventListener('click', () => createGame(login, password));
+        .addEventListener('click', () =>
+            displayCreateGamesPage(login, password)
+        );
 
     document
         .getElementById('logout')
@@ -169,8 +173,6 @@ async function displayAvailableGames(login, password) {
         console.error('Failed to fetch user games:', error);
     }
 }
-
-function createGame(login, password) {}
 
 function enterGame(login, password, gameID) {}
 
