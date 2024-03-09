@@ -1,5 +1,5 @@
 async function fetchData(pname, params) {
-    let url = `https://sql.lavro.ru/call.php?pname=${pname}&db=312279`;
+    let url = `https://sql.lavro.ru/call.php?pname=${pname}&db=277446`;
 
     params.forEach((param, index) => {
         url += `&p${index + 1}=${param}`;
@@ -36,7 +36,7 @@ async function handleFormSubmission(buttonId, pname, loginId, passwordId) {
                 if (firstKey === 'ERROR') {
                     displayError(data['RESULTS'][0][firstKey]);
                 } else {
-                    displayGamesPage(login);
+                    displayUserGames(login, password);
                 }
             } catch (error) {
                 console.error(`${pname} failed`, error);
@@ -50,12 +50,10 @@ function displayError(errorMessage) {
     errorDiv.textContent = errorMessage;
 }
 
-function loadEnter() {
+function loadAuth() {
     document.body.innerHTML = '';
-    document.body.className = '';
-    document.body.classList.add('enter');
+    document.body.id = 'enter';
 
-    // Define the new HTML content
     const newHTMLContent = `
         <a href="index.html">
             <button class="back">
@@ -76,6 +74,7 @@ function loadEnter() {
                 <div>
                     <button type="button" id="loginButton">Вход</button>
                 </div>
+                <p id="error-message"></p>
             </form>
         </div>
 
@@ -105,7 +104,11 @@ function loadEnter() {
     backButton.onclick = function () {
         loadMain();
     };
+    handleFormSubmission('loginButton', 'authorization', 'login', 'password');
+    handleFormSubmission(
+        'registerButton',
+        'registration',
+        'reg-login',
+        'reg-password'
+    );
 }
-
-handleFormSubmission('loginButton', 'auth', 'login', 'password');
-handleFormSubmission('registerButton', 'register', 'reg-login', 'reg-password');

@@ -1,7 +1,6 @@
 function loadMain() {
     document.body.innerHTML = '';
-    document.body.removeAttribute('class');
-    document.body.classList.add('index');
+    document.body.id = 'index';
     const newHTMLContent = `
           <h1>Концепт</h1>
           <div class="buttons">
@@ -16,13 +15,13 @@ function loadMain() {
         loadRules();
     };
     document.getElementById('enter').onclick = function () {
-        loadEnter();
+        loadAuth();
     };
 }
 
 function loadRules() {
     document.body.innerHTML = '';
-    document.body.className = 'rules';
+    document.body.id = 'rules';
 
     const newHTMLContent = `
           <a href="index.html">

@@ -14,6 +14,7 @@
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 html, body {
     margin: 0;
@@ -25,7 +26,7 @@ body {
     padding: 12vh 4vw;
 }
 
-body.index {
+body#index {
     background-image: url('images/index-background.svg');
     display: flex;
     flex-direction: column;
@@ -40,7 +41,7 @@ h1 {
     margin-top: 0;
 }
 
-.index button {
+#index button {
     font-family: 'Mikar', sans-serif;
     font-size: 64px;
     border-style: hidden;
@@ -49,18 +50,18 @@ h1 {
     padding: 20px 60px;
 }
 
-.index .buttons {
+#index .buttons {
     display: flex;
     justify-content: space-around;
     gap: 5vw;
 }
 
-body.enter {
+body#enter {
     background-image: url('images/enter-background.svg');
     display: flex;
 }
 
-.enter h1 {
+#enter h1 {
     font-size: 64px;
 }
 
@@ -71,22 +72,22 @@ button.back {
     margin-right: 48px;
 }
 
-.enter form {
+#enter form {
     margin-right: 10vw;
 }
 
-.enter form > div {
+#enter form > div {
     display: flex;
     flex-direction: column;
 }
 
-.enter form label {
+#enter form label {
     font-family: 'Cruinn', sans-serif;
     font-weight: 600;
     font-size: 24px;
 }
 
-.enter form input {
+#enter form input {
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     width: 340px;
@@ -97,7 +98,7 @@ button.back {
     margin-bottom: 20px;
 }
 
-.enter form button {
+#enter form button {
     padding: 16px 32px;
     width: min-content;
     border: none;
@@ -109,19 +110,133 @@ button.back {
     margin-top: 20px;
 }
 
-body.rules {
+body#rules, body#games {
     background-image: url('images/rules-background.svg');
     display: flex;
 }
 
-.rules h1 {
+#rules h1 {
     font-size: 64px;
 }
 
-.rules p {
+#rules p {
     font-family: 'Mikar', sans-serif;
     font-size: 36px;
     background-color: #E5E2F3;
     padding: 48px;
     margin-right: 96px;
+}
+
+#games h1 {
+    font-size: 64px;
+}
+
+#games button {
+    padding: 16px 32px;
+    width: fit-content;
+    border: none;
+    border-radius: 10px;
+    color: #ffffff;
+    background-color: #723DB6;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+body#games {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+#games header {
+    display: flex;
+    justify-content: space-between;
+}
+
+#games main {
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
+}
+
+.game {
+    background-color: #E5E2F3;
+    padding: 16px 48px;
+    border-radius: 10px;
+    font-family: 'Cruinn', sans-serif;
+}
+
+.game .data {
+    display: flex;
+    justify-content: space-around;
+}
+
+.game button {
+    padding: 16px 32px;
+    margin-left: 32px;
+}
+
+button#logout {
+    background-color: #4E4343;
+}
+
+body#createGame {
+    background-image: url('images/rules-background.svg');
+}
+
+#createGame h1{
+    font-size: 64px;
+}
+
+#createGame header {
+    display: flex;
+}
+
+#createGame main {
+    background-color: #E5E2F3;
+    padding: 5vh 5vw;
+    border-radius: 10px;
+    margin: 0 5vw;
+}
+
+#createGame form {
+    display: flex;
+}
+
+#createGame form > div, #createGame form > div > div {
+    display: flex;
+    flex-direction: column;
+}
+
+#createGame form > div {
+    width: 50%;
+}
+
+#createGame form label {
+    font-family: 'Cruinn', sans-serif;
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+#createGame form input, #createGame form select {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    padding: 14px;
+    border-radius: 4px;
+    border: none;
+    background-color: #F3EFFF;
+    width: 70%;
+    margin-bottom: 4vh;
+}
+
+#createGame form button {
+    padding: 16px 32px;
+    width: fit-content;
+    border: none;
+    border-radius: 10px;
+    color: #ffffff;
+    background-color: #723DB6;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    margin-top: 20px;
 }
