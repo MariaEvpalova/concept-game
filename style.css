@@ -240,3 +240,140 @@ body#createGame {
     font-size: 14px;
     margin-top: 20px;
 }
+
+body#gamePage {
+    background-image: url('images/rules-background.svg');
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 90% auto;
+    gap: 1rem;
+    height: 100vh;
+    box-sizing: border-box;
+    padding: 10vh 10vw;
+}
+
+#gamePage #symbols {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5vh;
+    column-gap: 5vh;
+    row-gap: 5vh;
+    overflow-y: auto;
+    width: fit-content;
+}
+
+#gamePage #symbols img {
+    width: 12vw;
+    height: auto;
+}
+
+#gamePage #exit {
+    display: flex;
+    align-items: center;
+}
+
+#gamePage #exitGame, #gamePage #putLabel, #gamePage #beginRound {
+    padding: 16px 32px;
+    width: fit-content;
+    border: none;
+    border-radius: 10px;
+    color: #ffffff;
+    background-color: #723DB6;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+#gamePage #putLabel {
+    margin-left: 3vw;
+}
+
+#gamePage #score {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#gamePage #beginRound {
+    margin: 0;
+}
+
+#gamePage #score p { 
+    font-family: 'Cruinn', sans-serif;
+    font-size: 36px;
+    margin: 0;
+}
+
+#gamePage #chat {
+    background-color: #E5E2F3;
+    border-radius: 10px;
+    padding: 4vh 3vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#gamePage #chat > div:first-child {
+    overflow-y: auto;
+    position: relative;
+} 
+
+#gamePage #chat h1 {
+    font-family: 'Cruinn', sans-serif;
+    font-size: 48px;
+    margin-bottom: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #E5E2F3;
+    width: 100%;
+}
+
+#gamePage #chat form {
+    display: flex;
+    align-items: center;
+    margin-top: 4vh;
+}
+
+#gamePage #chat form input {
+    color: #75727A;
+    font-family: 'Cruinn', sans-serif;
+    font-size: 16px;
+    background-color: #F3EFFF;
+    border: none;
+    padding: 16px 20px;
+    border-radius: 10px;
+    margin-right: 24px;
+    flex: 1;
+}
+
+#gamePage #chat form button {
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+#gamePage #messages {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    flex: 1;
+    max-height: 100%;
+    overflow-y: scroll;
+}
+
+#gamePage #messages p {
+    font-family: 'Cruinn', sans-serif;
+    font-size: 15px;
+    background-color: #D9D9D9;
+    width: fit-content;
+    padding: 18px;
+    border-radius: 10px 10px 10px 0;
+    margin: 0;
+}
+
+#gamePage #messages p.my {
+    align-self: flex-end;
+    border-radius: 10px 10px 0 10px;
+}

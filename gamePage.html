@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Концепт</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body id="gamePage">
+        <div id="symbols">
+            <img src="images/placeholder.svg" alt="icon" />
+            <img src="images/placeholder.svg" alt="icon" />
+            <img src="images/placeholder.svg" alt="icon" />
+            <img src="images/placeholder.svg" alt="icon" />
+            <img src="images/placeholder.svg" alt="icon" />
+            <img src="images/placeholder.svg" alt="icon" />
+            <img src="images/placeholder.svg" alt="icon" />
+            <img src="images/placeholder.svg" alt="icon" />
+            <img src="images/placeholder.svg" alt="icon" />
+            <img src="images/placeholder.svg" alt="icon" />
+            <img src="images/placeholder.svg" alt="icon" />
+            <img src="images/placeholder.svg" alt="icon" />
+        </div>
+        <div id="chat">
+            <div>
+                <h1>Чат</h1>
+                <div id="messages">
+                    <p>рыба</p>
+                    <p>корреспондент</p>
+                    <p>редакция</p>
+                    <p class="my">министр</p>
+                    <p>Вы угадали слово!</p>
+                    <p>рыба</p>
+                    <p>корреспондент</p>
+                    <p>редакция</p>
+                    <p class="my">министр</p>
+                    <p>Вы угадали слово!</p>
+                    <p>рыба</p>
+                    <p>корреспондент</p>
+                    <p>редакция</p>
+                    <p class="my">министр</p>
+                    <p>Вы угадали слово!</p>
+                </div>
+            </div>
+            <form>
+                <input
+                    type="text"
+                    id="messageInput"
+                    placeholder="Отправить сообщение" />
+                <button id="sendButton">
+                    <img src="images/send.svg" alt="send" />
+                </button>
+            </form>
+        </div>
+        <div id="exit">
+            <button id="exitGame">Выйти из игры</button>
+        </div>
+        <div id="score">
+            <p>Ваши баллы: 5</p>
+        </div>
+        <script>
+            const messages = document.getElementById('messages');
+            messages.scrollTop = messages.scrollHeight;
+        </script>
+    </body>
+</html>
