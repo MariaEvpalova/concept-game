@@ -377,3 +377,28 @@ body#gamePage {
     align-self: flex-end;
     border-radius: 10px 10px 0 10px;
 }
+
+#symbolsPage {
+    background-image: url('images/rules-background.svg');
+    display: flex;
+}
+
+#symbolsPage div {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: stretch;
+    row-gap: 4vh;
+    overflow-y: auto;
+}
+
+#symbolsPage div button{
+    background-color: transparent;
+    padding: 0;
+    border: none;
+}
+
+#symbolsPage div img {
+    width: 15vw;
+    border-radius: 10px;
+}

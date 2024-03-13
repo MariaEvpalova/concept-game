@@ -24,11 +24,9 @@ function loadRules() {
     document.body.id = 'rules';
 
     const newHTMLContent = `
-          <a href="index.html">
-              <button class="back">
+              <button id="back">
                   <img src="images/back.svg" alt="back arrow" />
               </button>
-          </a>
           <div>
               <h1>Правила</h1>
               <p>
@@ -46,7 +44,7 @@ function loadRules() {
 
     document.body.innerHTML = newHTMLContent;
 
-    const backButton = document.querySelector('.back');
+    const backButton = document.getElementById('back');
     backButton.onclick = function () {
         loadMain();
     };
