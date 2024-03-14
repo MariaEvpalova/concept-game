@@ -79,7 +79,7 @@ async function displayUserGames(login, password) {
             joinButton.className = 'join';
             joinButton.textContent = 'Присоединиться к игре';
             joinButton.addEventListener('click', () =>
-                enterGame(login, password, games.gameID[i])
+                enterMyGame(login, password, games.gameID[i])
             );
 
             gameElement.appendChild(joinButton);
@@ -162,7 +162,7 @@ async function displayAvailableGames(login, password) {
             joinButton.className = 'join';
             joinButton.textContent = 'Присоединиться к игре';
             joinButton.addEventListener('click', () =>
-                enterGame(login, password, games.gameID[i])
+                enterOtherGame(login, password, games.gameID[i])
             );
 
             gameElement.appendChild(joinButton);
@@ -174,7 +174,17 @@ async function displayAvailableGames(login, password) {
     }
 }
 
-function enterGame(login, password, gameID) {}
+async function enterMyGame(login, password, gameID) {
+    const data = await fetchData('enterMyGame', [gameID, login, password]);
+    if (Object.keys(data)[0] == 'ERROR') console.log(data['ERROR']);
+    else displayGamePage(login, password, gameID);
+}
+
+async function enterOtherGame(login, password, gameID) {
+    const data = await fetchData('takePart', [gameID, login, password]);
+    if (Object.keys(data)[0] == 'ERROR') console.log(data['ERROR']);
+    else displayGamePage(login, password, gameID);
+}
 
 function logout(login, password) {
     loadMain();

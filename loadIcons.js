@@ -22,9 +22,8 @@ async function fetchData(pname, params) {
         throw error;
     }
 }
-const fs = require('fs').promises; // Assuming Node.js environment and fs is already imported
+const fs = require('fs').promises;
 
-// Utility function to create a delay
 function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
