@@ -4,38 +4,11 @@ function displayGamePage(login, password, gameID) {
 
     const newContent = `
         <div id="symbols">
-            <img src="images/placeholder.svg" alt="icon" />
-            <img src="images/placeholder.svg" alt="icon" />
-            <img src="images/placeholder.svg" alt="icon" />
-            <img src="images/placeholder.svg" alt="icon" />
-            <img src="images/placeholder.svg" alt="icon" />
-            <img src="images/placeholder.svg" alt="icon" />
-            <img src="images/placeholder.svg" alt="icon" />
-            <img src="images/placeholder.svg" alt="icon" />
-            <img src="images/placeholder.svg" alt="icon" />
-            <img src="images/placeholder.svg" alt="icon" />
-            <img src="images/placeholder.svg" alt="icon" />
-            <img src="images/placeholder.svg" alt="icon" />
         </div>
         <div id="chat">
             <div>
                 <h1>Чат</h1>
                 <div id="messages">
-                    <p>рыба</p>
-                    <p>корреспондент</p>
-                    <p>редакция</p>
-                    <p class="my">министр</p>
-                    <p>Вы угадали слово!</p>
-                    <p>рыба</p>
-                    <p>корреспондент</p>
-                    <p>редакция</p>
-                    <p class="my">министр</p>
-                    <p>Вы угадали слово!</p>
-                    <p>рыба</p>
-                    <p>корреспондент</p>
-                    <p>редакция</p>
-                    <p class="my">министр</p>
-                    <p>Вы угадали слово!</p>
                 </div>
             </div>
             <form>
@@ -65,10 +38,65 @@ function displayGamePage(login, password, gameID) {
     document.getElementById('exitGame').addEventListener('click', function () {
         exitGame(login, password, gameID);
     });
+
+    displaySMS(login, password, gameID);
+    const sendButton = document.getElementById('sendButton');
+    const messageInput = document.getElementById('messageInput');
+    sendButton.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        const message = messageInput.value;
+        if (message.trim() !== '') {
+            sendSMS(message, login, password, gameID);
+            messageInput.value = '';
+        } else {
+            console.log('Message is empty.');
+        }
+    });
+
+    displayChips(login, password, gameID);
 }
 
 async function exitGame(login, password, gameID) {
     const data = await fetchData('leaveGame', [gameID, login, password]);
     if (Object.keys(data)[0] == 'ERROR') console.log(data['ERROR']);
     else displayUserGames(login, password);
+}
+
+async function displaySMS(login, password, gameID) {
+    let data = await fetchData('ViewSmsHistory', [gameID]);
+    if (Object.keys(data)[0] == 'ERROR') console.log(data['ERROR']);
+    data = data['RESULTS'][0];
+
+    const messagesElement = document.getElementById('messages');
+    messagesElement.innerHTML = '';
+
+    for (let i = 0; i < data.SendDateTime.length; i++) {
+        const message = document.createElement('p');
+        message.textContent = data['massage'][i];
+        if (data['userName'][i] == login) message.className = 'my';
+        messagesElement.appendChild(message);
+    }
+}
+
+async function sendSMS(message, login, password, gameID) {
+    const data = await fetchData('sendSMS', [message, login, password, gameID]);
+    if (Object.keys(data)[0] == 'ERROR') console.log(data['ERROR']);
+    else displaySMS(login, password, gameID);
+}
+
+async function displayChips(login, password, gameID) {
+    let data = await fetchData('displayGameChips', [login, password, gameID]);
+    if (Object.keys(data)[0] == 'ERROR') console.log(data['ERROR']);
+    else {
+        data = data['RESULTS'][0];
+        const container = document.getElementById('symbols');
+        container.innerHTML = '';
+        for (let i = 0; i < data.image.length; i++) {
+            const img = document.createElement('img');
+            img.src = `icons/${data.image[i]}.png`;
+            img.alt = data.image[i];
+            container.appendChild(img);
+        }
+    }
 }
