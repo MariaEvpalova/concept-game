@@ -100,3 +100,12 @@ async function displayChips(login, password, gameID) {
         }
     }
 }
+
+async function isMaster(login, gameID) {
+    let data = await fetchData('WhoIsMaster', [gameID]);
+    if (Object.keys(data)[0] == 'ERROR') console.log(data['ERROR']);
+    else {
+        data = data['RESULTS'][0];
+        return data['MASTER'] == login;
+    }
+}
