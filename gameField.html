@@ -1,0 +1,33 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Концепт</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body id="gamePage" class="">
+        <div id="symbols"></div>
+        <div id="chat">
+            <div>
+                <h1>Чат</h1>
+                <div id="messages"><p class="my">hola</p></div>
+            </div>
+            <form>
+                <input
+                    type="text"
+                    id="messageInput"
+                    placeholder="Отправить сообщение" />
+                <button id="sendButton">
+                    <img src="images/send.svg" alt="send" />
+                </button>
+            </form>
+        </div>
+        <div id="exit">
+            <button id="exitGame">Выйти из игры</button>
+        </div>
+        <div id="score">
+            <p>Ваши баллы: 5</p>
+        </div>
+        <script src="scripts/gameFlow.js"></script>
+    </body>
+</html>

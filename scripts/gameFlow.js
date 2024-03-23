@@ -1,4 +1,21 @@
-function displayGamePage(login, password, gameID) {
+function enterGameField(login, password, gameID, gamePhase) {
+    displayGamePage(login, password, gameID);
+    switch (gamePhase) {
+        case 'waiting':
+            waitingPhase(login, password, gameID);
+            break;
+        case 'guessing':
+            guessingPhase(login, password, gameID);
+            break;
+        case 'ideas':
+            ideasPhase(login, password, gameID);
+            break;
+        default:
+            console.log('Unknown game phase');
+    }
+}
+
+async function displayGamePage(login, password, gameID) {
     document.body.id = 'gamePage';
     document.body.className = '';
 
@@ -25,13 +42,11 @@ function displayGamePage(login, password, gameID) {
             <button id="exitGame">Выйти из игры</button>
         </div>
         <div id="score">
-            <p>Ваши баллы: 5</p>
         </div>
     `;
 
     document.body.innerHTML = newContent;
 
-    // Automatically scroll the messages to the bottom
     const messages = document.getElementById('messages');
     messages.scrollTop = messages.scrollHeight;
 
@@ -40,21 +55,28 @@ function displayGamePage(login, password, gameID) {
     });
 
     displaySMS(login, password, gameID);
-    const sendButton = document.getElementById('sendButton');
-    const messageInput = document.getElementById('messageInput');
-    sendButton.addEventListener('click', function (event) {
-        event.preventDefault();
-
-        const message = messageInput.value;
-        if (message.trim() !== '') {
-            sendSMS(message, login, password, gameID);
-            messageInput.value = '';
-        } else {
-            console.log('Message is empty.');
-        }
-    });
-
     displayChips(login, password, gameID);
+}
+
+function displayWinMessage() {
+    const overlay = document.createElement('div');
+    overlay.id = 'overlay';
+
+    const messageBox = document.createElement('div');
+    messageBox.id = 'overlayMessage';
+    messageBox.innerHTML = `
+        <p>Вы угадали слово!</p>
+        <button id="continueButton">Продолжить</button>
+    `;
+
+    overlay.appendChild(messageBox);
+    document.body.appendChild(overlay);
+
+    document
+        .getElementById('continueButton')
+        .addEventListener('click', function () {
+            document.body.removeChild(overlay);
+        });
 }
 
 async function exitGame(login, password, gameID) {
@@ -63,41 +85,12 @@ async function exitGame(login, password, gameID) {
     else displayUserGames(login, password);
 }
 
-async function displaySMS(login, password, gameID) {
-    let data = await fetchData('ViewSmsHistory', [gameID]);
-    if (Object.keys(data)[0] == 'ERROR') console.log(data['ERROR']);
-    data = data['RESULTS'][0];
-
-    const messagesElement = document.getElementById('messages');
-    messagesElement.innerHTML = '';
-
-    for (let i = 0; i < data.SendDateTime.length; i++) {
-        const message = document.createElement('p');
-        message.textContent = data['massage'][i];
-        if (data['userName'][i] == login) message.className = 'my';
-        messagesElement.appendChild(message);
-    }
-}
-
-async function sendSMS(message, login, password, gameID) {
-    const data = await fetchData('sendSMS', [message, login, password, gameID]);
-    if (Object.keys(data)[0] == 'ERROR') console.log(data['ERROR']);
-    else displaySMS(login, password, gameID);
-}
-
-async function displayChips(login, password, gameID) {
-    let data = await fetchData('displayGameChips', [login, password, gameID]);
+async function displayScore(login, password, gameID) {
+    const data = await fetchData('displayScore', [login, password, gameID]);
     if (Object.keys(data)[0] == 'ERROR') console.log(data['ERROR']);
     else {
-        data = data['RESULTS'][0];
-        const container = document.getElementById('symbols');
-        container.innerHTML = '';
-        for (let i = 0; i < data.image.length; i++) {
-            const img = document.createElement('img');
-            img.src = `icons/${data.image[i]}.png`;
-            img.alt = data.image[i];
-            container.appendChild(img);
-        }
+        const score = document.getElementById('score');
+        score.innerHTML = `<p>Ваши баллы: ${data['RESULTS'][0]['POINTS'][0]}</p>`;
     }
 }
 
@@ -108,4 +101,47 @@ async function isMaster(login, gameID) {
         data = data['RESULTS'][0];
         return data['MASTER'] == login;
     }
+}
+
+function displayWaitingScreen() {
+    const overlay = document.createElement('div');
+    overlay.id = 'overlay';
+
+    const messageBox = document.createElement('div');
+    messageBox.id = 'overlayMessage';
+    messageBox.classList = 'waiting';
+    messageBox.innerHTML = `
+        <p>Ожидание игроков</p>
+        <img src="images/waiting.gif" alt="waiting" />
+    `;
+
+    overlay.appendChild(messageBox);
+    document.body.appendChild(overlay);
+}
+
+function removeWaitingScreen() {
+    const overlay = document.getElementById('overlay');
+    if (overlay) {
+        overlay.parentNode.removeChild(overlay);
+    }
+}
+
+function addMasterFunc(login, password, gameID) {
+    const putChipsButton = document.createElement('button');
+    putChipsButton.textContent = 'Поставить фишки';
+    putChipsButton.id = 'putChips';
+    document.getElementById('exit').appendChild(putChipsButton);
+
+    putChipsButton.addEventListener('click', () =>
+        createSymbolsPage(login, password, gameID)
+    );
+
+    const startTurnButton = document.createElement('button');
+    startTurnButton.textContent = 'Начать ход';
+    startTurnButton.id = 'startMove';
+    document.getElementById('score').appendChild(startTurnButton);
+
+    startTurnButton.addEventListener('click', () =>
+        beginIdeasPhase(login, password, gameID)
+    );
 }
