@@ -28,20 +28,12 @@ async function displayGamePage(login, password, gameID) {
                 <div id="messages">
                 </div>
             </div>
-            <form>
-                <input
-                    type="text"
-                    id="messageInput"
-                    placeholder="Отправить сообщение" />
-                <button id="sendButton">
-                    <img src="images/send.svg" alt="send" />
-                </button>
-            </form>
         </div>
         <div id="exit">
             <button id="exitGame">Выйти из игры</button>
         </div>
         <div id="score">
+            <p>Ваши баллы: 0</p>
         </div>
     `;
 
@@ -79,27 +71,12 @@ function displayWinMessage() {
         });
 }
 
-async function exitGame(login, password, gameID) {
-    const data = await fetchData('leaveGame', [gameID, login, password]);
-    if (Object.keys(data)[0] == 'ERROR') console.log(data['ERROR']);
-    else displayUserGames(login, password);
-}
-
 async function displayScore(login, password, gameID) {
     const data = await fetchData('displayScore', [login, password, gameID]);
     if (Object.keys(data)[0] == 'ERROR') console.log(data['ERROR']);
     else {
         const score = document.getElementById('score');
         score.innerHTML = `<p>Ваши баллы: ${data['RESULTS'][0]['POINTS'][0]}</p>`;
-    }
-}
-
-async function isMaster(login, gameID) {
-    let data = await fetchData('WhoIsMaster', [gameID]);
-    if (Object.keys(data)[0] == 'ERROR') console.log(data['ERROR']);
-    else {
-        data = data['RESULTS'][0];
-        return data['MASTER'] == login;
     }
 }
 
@@ -124,24 +101,4 @@ function removeWaitingScreen() {
     if (overlay) {
         overlay.parentNode.removeChild(overlay);
     }
-}
-
-function addMasterFunc(login, password, gameID) {
-    const putChipsButton = document.createElement('button');
-    putChipsButton.textContent = 'Поставить фишки';
-    putChipsButton.id = 'putChips';
-    document.getElementById('exit').appendChild(putChipsButton);
-
-    putChipsButton.addEventListener('click', () =>
-        createSymbolsPage(login, password, gameID)
-    );
-
-    const startTurnButton = document.createElement('button');
-    startTurnButton.textContent = 'Начать ход';
-    startTurnButton.id = 'startMove';
-    document.getElementById('score').appendChild(startTurnButton);
-
-    startTurnButton.addEventListener('click', () =>
-        beginIdeasPhase(login, password, gameID)
-    );
 }

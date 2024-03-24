@@ -29,7 +29,8 @@ async function guessingPhase(login, password, gameID) {
         if (intervalId === null) {
             intervalId = setInterval(async () => {
                 displayChips(login, password, gameID);
-                if (phase == 'waiting') ideasPhase(login, password, gameID);
+                if ((await currentPhase(gameID)) == 'ideas')
+                    ideasPhase(login, password, gameID);
             }, 1000);
         }
     }
@@ -47,11 +48,25 @@ async function ideasPhase(login, password, gameID) {
     if (intervalId !== null) {
         clearInterval(intervalId);
         intervalId = null;
-        intervalId = setInterval(() => {
-            displaySMS(login, password, gameID);
-        }, 1000);
     }
+    intervalId = setInterval(() => {
+        displaySMS(login, password, gameID);
+    }, 1000);
+
     if (!(await isMaster(login, gameID))) enableSMS(login, password, gameID);
+    else disableMasterFunc();
+}
+
+async function exitGame(login, password, gameID) {
+    const data = await fetchData('leaveGame', [gameID, login, password]);
+    if (Object.keys(data)[0] == 'ERROR') console.log(data['ERROR']);
+    else {
+        if (intervalId !== null) {
+            clearInterval(intervalId);
+            intervalId = null;
+        }
+        displayUserGames(login, password);
+    }
 }
 
 /*

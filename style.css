@@ -275,7 +275,7 @@ body#gamePage {
     align-items: center;
 }
 
-#gamePage #exitGame, #gamePage #putLabel, #gamePage #beginRound {
+#gamePage #exitGame, #gamePage #putLabel, #gamePage #beginRound, #gamePage #startMove {
     padding: 16px 32px;
     width: fit-content;
     border: none;

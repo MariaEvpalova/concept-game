@@ -24,8 +24,27 @@ async function sendSMS(message, login, password, gameID) {
 }
 
 function enableSMS(login, password, gameID) {
-    const sendButton = document.getElementById('sendButton');
-    const messageInput = document.getElementById('messageInput');
+    const chatDiv = document.getElementById('chat');
+
+    const form = document.createElement('form');
+    const messageInput = document.createElement('input');
+    const sendButton = document.createElement('button');
+    const sendIcon = document.createElement('img');
+
+    messageInput.type = 'text';
+    messageInput.id = 'messageInput';
+    messageInput.placeholder = 'Отправить сообщение';
+
+    sendButton.id = 'sendButton';
+
+    sendIcon.src = 'images/send.svg';
+    sendIcon.alt = 'send';
+
+    sendButton.appendChild(sendIcon);
+    form.appendChild(messageInput);
+    form.appendChild(sendButton);
+    chatDiv.appendChild(form);
+
     sendButton.addEventListener('click', function (event) {
         event.preventDefault();
 
@@ -40,7 +59,9 @@ function enableSMS(login, password, gameID) {
 }
 
 function disableSMS() {
-    const sendButton = document.getElementById('sendButton');
-    const sendButtonClone = sendButton.cloneNode(true);
-    sendButton.parentNode.replaceChild(sendButtonClone, sendButton);
+    const chatDiv = document.getElementById('chat');
+    const form = chatDiv.querySelector('form');
+    if (form) {
+        form.remove();
+    }
 }

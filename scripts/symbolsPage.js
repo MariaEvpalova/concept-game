@@ -10,13 +10,12 @@ function createSymbolsPage(login, password, gameID) {
         'air',
         'airborne',
         'arm',
-        'arts',
+        'atrs',
         'baby',
         'break',
         'broken',
         'building',
         'circle',
-        'clear',
         'clothing',
         'cloud',
         'cone',
@@ -41,7 +40,6 @@ function createSymbolsPage(login, password, gameID) {
         'flat',
         'flora',
         'food',
-        'fragment',
         'games',
         'grid',
         'head',
@@ -70,13 +68,13 @@ function createSymbolsPage(login, password, gameID) {
         'nose',
         'object',
         'opposed',
+        'opposed2',
+        'outside',
         'paper',
         'part',
         'person',
         'plastic',
         'power',
-        'pyramid',
-        'reality',
         'recreation',
         'rectangle',
         'religion',
@@ -86,7 +84,6 @@ function createSymbolsPage(login, password, gameID) {
         'sad',
         'science',
         'sinusoidal',
-        'skinny',
         'slow',
         'small',
         'sphere',
@@ -95,19 +92,17 @@ function createSymbolsPage(login, password, gameID) {
         'straight',
         'sun',
         'tall',
-        'television',
+        'televition',
         'theatre',
         'time',
         'title',
         'tools',
-        'top',
         'torso',
         'triangle',
         'turn',
         'unity',
         'use',
         'vehicle',
-        'water',
         'watercraft',
         'wildlife',
         'wood',
@@ -123,7 +118,7 @@ function createSymbolsPage(login, password, gameID) {
         });
 
         const img = document.createElement('img');
-        img.src = `icons/${iconName}.png`;
+        img.src = `icons/${iconName}.svg`;
         img.alt = iconName;
 
         button.appendChild(img);
@@ -143,7 +138,7 @@ async function displayChips(login, password, gameID) {
         container.innerHTML = '';
         for (let i = 0; i < data.image.length; i++) {
             const img = document.createElement('img');
-            img.src = `icons/${data.image[i]}.png`;
+            img.src = `icons/${data.image[i]}.svg`;
             img.alt = data.image[i];
             container.appendChild(img);
         }
@@ -153,5 +148,6 @@ async function displayChips(login, password, gameID) {
 async function addSymbol(login, password, gameID, symbol) {
     let data = await fetchData('addChip', [login, password, gameID, symbol]);
     if (Object.keys(data)[0] == 'ERROR') console.log(data['ERROR']);
-    displayGamePage(login, password, gameID);
+    await displayGamePage(login, password, gameID);
+    addMasterFunc(login, password, gameID);
 }
