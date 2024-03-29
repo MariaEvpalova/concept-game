@@ -20,7 +20,7 @@ function addMasterFunc(login, password, gameID) {
     const startTurnButton = document.createElement('button');
     startTurnButton.textContent = 'Начать ход';
     startTurnButton.id = 'startMove';
-    document.getElementById('score').appendChild(startTurnButton);
+    document.getElementById('start').appendChild(startTurnButton);
 
     startTurnButton.addEventListener('click', () =>
         beginIdeasPhase(login, password, gameID)

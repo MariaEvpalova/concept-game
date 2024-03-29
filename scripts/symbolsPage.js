@@ -1,4 +1,9 @@
 function createSymbolsPage(login, password, gameID) {
+    if (intervalId !== null) {
+        clearInterval(intervalId);
+        intervalId = null;
+    }
+
     document.body.innerHTML = '';
     document.body.id = 'symbolsPage';
 
@@ -10,7 +15,7 @@ function createSymbolsPage(login, password, gameID) {
         'air',
         'airborne',
         'arm',
-        'atrs',
+        'arts',
         'baby',
         'break',
         'broken',
@@ -146,8 +151,21 @@ async function displayChips(login, password, gameID) {
 }
 
 async function addSymbol(login, password, gameID, symbol) {
-    let data = await fetchData('addChip', [login, password, gameID, symbol]);
+    let data = await fetchData('SetGameChips', [
+        login,
+        password,
+        '.',
+        'red',
+        symbol,
+        gameID,
+    ]);
     if (Object.keys(data)[0] == 'ERROR') console.log(data['ERROR']);
     await displayGamePage(login, password, gameID);
     addMasterFunc(login, password, gameID);
+}
+
+async function exitSymbolsPage(login, password, gameID) {
+    await displayGamePage(login, password, gameID);
+    addMasterFunc(login, password, gameID);
+    guessingPhase(login, password, gameID);
 }

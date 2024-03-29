@@ -17,23 +17,22 @@ function waitingPhase(login, password, gameID) {
 }
 
 async function guessingPhase(login, password, gameID) {
+    disableSMS();
+    await displayScore(login, password, gameID);
+    await displayAttempts(login, password, gameID);
     if (intervalId !== null) {
         clearInterval(intervalId);
         intervalId = null;
     }
     removeWaitingScreen();
 
-    if (await isMaster(login, gameID)) {
-        addMasterFunc(login, password, gameID);
-    } else {
-        if (intervalId === null) {
-            intervalId = setInterval(async () => {
-                displayChips(login, password, gameID);
-                if ((await currentPhase(gameID)) == 'ideas')
-                    ideasPhase(login, password, gameID);
-            }, 1000);
-        }
-    }
+    if (await isMaster(login, gameID)) addMasterFunc(login, password, gameID);
+
+    intervalId = setInterval(async () => {
+        displayChips(login, password, gameID);
+        if ((await currentPhase(gameID)) == 'ideas')
+            ideasPhase(login, password, gameID);
+    }, 1000);
 }
 
 async function beginIdeasPhase(login, password, gameID) {
@@ -49,8 +48,10 @@ async function ideasPhase(login, password, gameID) {
         clearInterval(intervalId);
         intervalId = null;
     }
-    intervalId = setInterval(() => {
+    intervalId = setInterval(async () => {
         displaySMS(login, password, gameID);
+        if ((await currentPhase(gameID)) == 'guessing')
+            guessingPhase(login, password, gameID);
     }, 1000);
 
     if (!(await isMaster(login, gameID))) enableSMS(login, password, gameID);

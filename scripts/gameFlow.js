@@ -32,9 +32,14 @@ async function displayGamePage(login, password, gameID) {
         <div id="exit">
             <button id="exitGame">Выйти из игры</button>
         </div>
+        <div id="info">
         <div id="score">
-            <p>Ваши баллы: 0</p>
+            <p>Ваш счет: 0</p>
+            <p>Ваши попытки: 0</p>
         </div>
+        <div id="start">
+        </div>
+    </div>
     `;
 
     document.body.innerHTML = newContent;
@@ -69,15 +74,6 @@ function displayWinMessage() {
         .addEventListener('click', function () {
             document.body.removeChild(overlay);
         });
-}
-
-async function displayScore(login, password, gameID) {
-    const data = await fetchData('displayScore', [login, password, gameID]);
-    if (Object.keys(data)[0] == 'ERROR') console.log(data['ERROR']);
-    else {
-        const score = document.getElementById('score');
-        score.innerHTML = `<p>Ваши баллы: ${data['RESULTS'][0]['POINTS'][0]}</p>`;
-    }
 }
 
 function displayWaitingScreen() {
