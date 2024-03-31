@@ -58,11 +58,18 @@ h1 {
 
 body#enter {
     background-image: url('images/enter-background.svg');
-    display: flex;
 }
 
 #enter h1 {
     font-size: 64px;
+}
+
+#error-message {
+    font-family: 'MakiSans', sans-serif;
+    font-size: 36px;
+    font-weight: 500;
+    width: fit-content;
+    margin-left: 8vw;
 }
 
 button#back {
@@ -74,6 +81,10 @@ button#back {
 
 #enter form {
     margin-right: 10vw;
+}
+
+#enter > div {
+    display: flex;
 }
 
 #enter form > div {

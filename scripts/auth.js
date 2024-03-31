@@ -33,7 +33,7 @@ async function handleFormSubmission(buttonId, pname, loginId, passwordId) {
             try {
                 const data = await fetchData(pname, [login, password]);
                 const firstKey = Object.keys(data['RESULTS'][0])[0];
-                if (firstKey === 'ERROR') {
+                if (firstKey === 'ERROR_MESSAGE') {
                     displayError(data['RESULTS'][0][firstKey]);
                 } else {
                     displayUserGames(login, password);
@@ -55,47 +55,49 @@ function loadAuth() {
     document.body.id = 'enter';
 
     const newHTMLContent = `
-        <a href="index.html">
-            <button id="back">
-                <img src="images/back.svg" alt="back arrow" />
-            </button>
-        </a>
         <div>
-            <h1>Вход</h1>
-            <form id="loginForm">
-                <div>
-                    <label for="login">Имя пользователя:</label>
-                    <input type="text" id="login" name="login" />
-                </div>
-                <div>
-                    <label for="password">Пароль:</label>
-                    <input type="password" id="password" name="password" />
-                </div>
-                <div>
-                    <button type="button" id="loginButton">Вход</button>
-                </div>
-                <p id="error-message"></p>
-            </form>
-        </div>
+            <a href="index.html">
+                <button id="back">
+                    <img src="images/back.svg" alt="back arrow" />
+                </button>
+            </a>
+            <div>
+                <h1>Вход</h1>
+                <form id="loginForm">
+                    <div>
+                        <label for="login">Имя пользователя:</label>
+                        <input type="text" id="login" name="login" />
+                    </div>
+                    <div>
+                        <label for="password">Пароль:</label>
+                        <input type="password" id="password" name="password" />
+                    </div>
+                    <div>
+                        <button type="button" id="loginButton">Вход</button>
+                    </div>
+                </form>
+            </div>
 
-        <div>
-            <h1>Регистрация</h1>
-            <form id="registrationForm">
-                <div>
-                    <label for="reg-login">Имя пользователя:</label>
-                    <input type="text" id="reg-login" name="login" />
-                </div>
-                <div>
-                    <label for="reg-password">Пароль:</label>
-                    <input type="password" id="reg-password" name="password" />
-                </div>
-                <div>
-                    <button type="button" id="registerButton">
-                        Зарегистрироваться
-                    </button>
-                </div>
-            </form>
+            <div>
+                <h1>Регистрация</h1>
+                <form id="registrationForm">
+                    <div>
+                        <label for="reg-login">Имя пользователя:</label>
+                        <input type="text" id="reg-login" name="login" />
+                    </div>
+                    <div>
+                        <label for="reg-password">Пароль:</label>
+                        <input type="password" id="reg-password" name="password" />
+                    </div>
+                    <div>
+                        <button type="button" id="registerButton">
+                            Зарегистрироваться
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
+        <p id="error-message"></p>
     `;
 
     document.body.innerHTML = newHTMLContent;
