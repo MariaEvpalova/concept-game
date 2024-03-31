@@ -168,7 +168,9 @@ body#games {
 
 .game .data {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    margin-left: 32px;
+    margin-right: 32px;
 }
 
 .game button {
@@ -275,7 +277,7 @@ body#gamePage {
     align-items: center;
 }
 
-#gamePage #exitGame, #gamePage #putLabel, #gamePage #beginRound, #gamePage #startMove {
+#gamePage #exitGame, #gamePage #putLabel, #gamePage #beginRound, #gamePage #startMove, #gamePage #changeStatus {
     padding: 16px 32px;
     width: fit-content;
     border: none;
@@ -293,8 +295,7 @@ body#gamePage {
 
 #gamePage #score {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
 }
 
 #gamePage #beginRound {
@@ -460,4 +461,18 @@ body#gamePage {
 
 #overlayMessage.waiting p {
     margin-bottom: 0;
+}
+
+#gamePage #overlayMessage.master > p:nth-child(2) {
+    font-family: 'Mikar', sans-serif;
+    font-size: 36px;
+}
+
+#gamePage #overlayMessage.master > p:first-child {
+    margin-bottom: 0;
+}
+
+#gamePage #info {
+    display: flex;
+    justify-content: space-between;
 }

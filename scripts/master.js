@@ -7,7 +7,8 @@ async function isMaster(login, gameID) {
     }
 }
 
-function addMasterFunc(login, password, gameID) {
+async function addMasterFunc(login, password, gameID) {
+    if (!(await isMaster(login, gameID))) return;
     const putChipsButton = document.createElement('button');
     putChipsButton.textContent = 'Поставить фишки';
     putChipsButton.id = 'putLabel';
@@ -25,6 +26,41 @@ function addMasterFunc(login, password, gameID) {
     startTurnButton.addEventListener('click', () =>
         beginIdeasPhase(login, password, gameID)
     );
+}
+
+async function masterAttempts(login, password, gameID) {
+    const data = await fetchData('MasterAttempts', [login, password, gameID]);
+    return data['RESULTS'][0]['ATTEMPTS'][0];
+}
+
+async function displayMasterMessage(login, password, gameID) {
+    const prevOverlay = document.getElementById('overlay');
+    if (prevOverlay) prevOverlay.parentNode.removeChild(prevOverlay);
+
+    const wordData = await fetchData('CurrentWord', [login, password, gameID]);
+    const word = wordData['RESULTS'][0]['WORD'][0];
+
+    const overlay = document.createElement('div');
+    overlay.id = 'overlay';
+
+    const messageBox = document.createElement('div');
+    messageBox.id = 'overlayMessage';
+    messageBox.classList = 'master';
+    messageBox.innerHTML = `
+            <p>Вы ведущий</p>
+            <p>Ваше слово: ${word}</p>
+            <button id="continueButton">Поставить фишки</button>
+        `;
+
+    overlay.appendChild(messageBox);
+    document.body.appendChild(overlay);
+
+    document
+        .getElementById('continueButton')
+        .addEventListener('click', function () {
+            document.body.removeChild(overlay);
+            createSymbolsPage(login, password, gameID);
+        });
 }
 
 function disableMasterFunc() {

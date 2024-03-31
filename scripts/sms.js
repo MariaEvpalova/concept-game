@@ -87,7 +87,11 @@ async function displayScore(login, password, gameID) {
 }
 
 async function displayAttempts(login, password, gameID) {
-    const data = await fetchData('displayAttempts', [login, password, gameID]);
+    let data;
+    if (await isMaster(login, gameID))
+        data = await fetchData('MasterAttempts', [login, password, gameID]);
+    else data = await fetchData('displayAttempts', [login, password, gameID]);
+
     if (Object.keys(data)[0] == 'ERROR') {
         console.log(data['ERROR']);
     } else {

@@ -30,6 +30,9 @@ async function displayGamePage(login, password, gameID) {
             </div>
         </div>
         <div id="exit">
+            <button id="back">
+            <img src="images/back.svg" alt="back arrow">
+            </button>
             <button id="exitGame">Выйти из игры</button>
         </div>
         <div id="info">
@@ -50,6 +53,9 @@ async function displayGamePage(login, password, gameID) {
     document.getElementById('exitGame').addEventListener('click', function () {
         exitGame(login, password, gameID);
     });
+    document.getElementById('back').addEventListener('click', function () {
+        displayUserGames(login, password);
+    });
 
     displaySMS(login, password, gameID);
     displayChips(login, password, gameID);
@@ -61,6 +67,7 @@ function displayWinMessage() {
 
     const messageBox = document.createElement('div');
     messageBox.id = 'overlayMessage';
+    messageBox.classList = 'win';
     messageBox.innerHTML = `
         <p>Вы угадали слово!</p>
         <button id="continueButton">Продолжить</button>
@@ -94,7 +101,28 @@ function displayWaitingScreen() {
 
 function removeWaitingScreen() {
     const overlay = document.getElementById('overlay');
-    if (overlay) {
+    if (overlay && document.getElementById('overlayMessage').classList != 'win')
         overlay.parentNode.removeChild(overlay);
-    }
+}
+
+function addChangeGameStatus(login, password, gameID) {
+    const changeStatusButton = document.createElement('button');
+    changeStatusButton.textContent = 'Сменить фазу';
+    changeStatusButton.id = 'changeStatus';
+    document.getElementById('start').innerHTML = '';
+    document.getElementById('start').appendChild(changeStatusButton);
+
+    changeStatusButton.addEventListener('click', () =>
+        changeGameStatus(login, password, gameID)
+    );
+}
+
+function removeChangeGameStatus() {
+    const changeStatusButton = document.getElementById('changeStatus');
+    if (changeStatusButton)
+        changeStatusButton.parentNode.removeChild(changeStatusButton);
+}
+
+async function changeGameStatus(login, password, gameID) {
+    fetchData('ChangeGameStatus', [login, password, gameID]);
 }
