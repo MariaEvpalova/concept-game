@@ -133,6 +133,7 @@ function createSymbolsPage(login, password, gameID) {
         });
 
         document.body.appendChild(symbolsDiv);
+        masterFuncAdded = false;
     }, 1000);
 }
 

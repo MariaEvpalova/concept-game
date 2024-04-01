@@ -7,7 +7,7 @@ async function isMaster(login, gameID) {
     }
 }
 
-let masterFuncAdded = false;
+let masterFuncAdded;
 
 async function addMasterFunc(login, password, gameID) {
     if (!(await isMaster(login, gameID))) return;

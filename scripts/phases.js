@@ -17,8 +17,6 @@ function waitingPhase(login, password, gameID) {
 }
 
 async function guessingPhase(login, password, gameID) {
-    if (guessingEntered) return;
-
     if (intervalId !== null) {
         clearInterval(intervalId);
         intervalId = null;
