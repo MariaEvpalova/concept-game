@@ -38,8 +38,11 @@ async function masterAttempts(login, password, gameID) {
 }
 
 async function displayMasterMessage(login, password, gameID) {
-    const prevOverlay = document.getElementById('overlay');
-    if (prevOverlay) prevOverlay.parentNode.removeChild(prevOverlay);
+    let prevOverlay = document.getElementById('overlay');
+    while (prevOverlay) {
+        prevOverlay.parentNode.removeChild(prevOverlay);
+        prevOverlay = document.getElementById('overlay');
+    }
 
     const wordData = await fetchData('CurrentWord', [login, password, gameID]);
     const word = wordData['RESULTS'][0]['WORD'][0];
