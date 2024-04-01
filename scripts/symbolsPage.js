@@ -4,134 +4,136 @@ function createSymbolsPage(login, password, gameID) {
         intervalId = null;
     }
 
-    document.body.innerHTML = '';
-    document.body.id = 'symbolsPage';
+    setTimeout(function () {
+        document.body.innerHTML = '';
+        document.body.id = 'symbolsPage';
 
-    const symbolsDiv = document.createElement('div');
-    symbolsDiv.id = 'symbols';
+        const symbolsDiv = document.createElement('div');
+        symbolsDiv.id = 'symbols';
 
-    const iconNames = [
-        'adult',
-        'air',
-        'airborne',
-        'arm',
-        'arts',
-        'baby',
-        'break',
-        'broken',
-        'building',
-        'circle',
-        'clothing',
-        'cloud',
-        'cone',
-        'conflict',
-        'cross',
-        'cube',
-        'curve',
-        'cylinder',
-        'date',
-        'death',
-        'defence',
-        'ear',
-        'earth',
-        'electronics',
-        'expression',
-        'eye',
-        'fabric',
-        'fast',
-        'female',
-        'fictional',
-        'fire',
-        'flat',
-        'flora',
-        'food',
-        'games',
-        'grid',
-        'head',
-        'holidays',
-        'hollow',
-        'home',
-        'huge',
-        'idea',
-        'inside',
-        'joyous',
-        'left',
-        'leg',
-        'life',
-        'lightning',
-        'literature',
-        'location',
-        'low',
-        'male',
-        'mechanical',
-        'medical',
-        'metal',
-        'money',
-        'mouth',
-        'music',
-        'night',
-        'nose',
-        'object',
-        'opposed',
-        'opposed2',
-        'outside',
-        'paper',
-        'part',
-        'person',
-        'plastic',
-        'power',
-        'recreation',
-        'rectangle',
-        'religion',
-        'right',
-        'ring',
-        'rock',
-        'sad',
-        'science',
-        'sinusoidal',
-        'slow',
-        'small',
-        'sphere',
-        'spiral',
-        'star',
-        'straight',
-        'sun',
-        'tall',
-        'televition',
-        'theatre',
-        'time',
-        'title',
-        'tools',
-        'torso',
-        'triangle',
-        'turn',
-        'unity',
-        'use',
-        'vehicle',
-        'watercraft',
-        'wildlife',
-        'wood',
-        'work',
-        'zero',
-    ];
+        const iconNames = [
+            'adult',
+            'air',
+            'airborne',
+            'arm',
+            'arts',
+            'baby',
+            'break',
+            'broken',
+            'building',
+            'circle',
+            'clothing',
+            'cloud',
+            'cone',
+            'conflict',
+            'cross',
+            'cube',
+            'curve',
+            'cylinder',
+            'date',
+            'death',
+            'defence',
+            'ear',
+            'earth',
+            'electronics',
+            'expression',
+            'eye',
+            'fabric',
+            'fast',
+            'female',
+            'fictional',
+            'fire',
+            'flat',
+            'flora',
+            'food',
+            'games',
+            'grid',
+            'head',
+            'holidays',
+            'hollow',
+            'home',
+            'huge',
+            'idea',
+            'inside',
+            'joyous',
+            'left',
+            'leg',
+            'life',
+            'lightning',
+            'literature',
+            'location',
+            'low',
+            'male',
+            'mechanical',
+            'medical',
+            'metal',
+            'money',
+            'mouth',
+            'music',
+            'night',
+            'nose',
+            'object',
+            'opposed',
+            'opposed2',
+            'outside',
+            'paper',
+            'part',
+            'person',
+            'plastic',
+            'power',
+            'recreation',
+            'rectangle',
+            'religion',
+            'right',
+            'ring',
+            'rock',
+            'sad',
+            'science',
+            'sinusoidal',
+            'slow',
+            'small',
+            'sphere',
+            'spiral',
+            'star',
+            'straight',
+            'sun',
+            'tall',
+            'televition',
+            'theatre',
+            'time',
+            'title',
+            'tools',
+            'torso',
+            'triangle',
+            'turn',
+            'unity',
+            'use',
+            'vehicle',
+            'watercraft',
+            'wildlife',
+            'wood',
+            'work',
+            'zero',
+        ];
 
-    iconNames.forEach((iconName) => {
-        const button = document.createElement('button');
+        iconNames.forEach((iconName) => {
+            const button = document.createElement('button');
 
-        button.addEventListener('click', function () {
-            addSymbol(login, password, gameID, iconName);
+            button.addEventListener('click', function () {
+                addSymbol(login, password, gameID, iconName);
+            });
+
+            const img = document.createElement('img');
+            img.src = `icons/${iconName}.svg`;
+            img.alt = iconName;
+
+            button.appendChild(img);
+
+            symbolsDiv.appendChild(button);
         });
 
-        const img = document.createElement('img');
-        img.src = `icons/${iconName}.svg`;
-        img.alt = iconName;
-
-        button.appendChild(img);
-
-        symbolsDiv.appendChild(button);
-    });
-
-    document.body.appendChild(symbolsDiv);
+        document.body.appendChild(symbolsDiv);
+    }, 1000);
 }
 
 async function displayChips(login, password, gameID) {
