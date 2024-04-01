@@ -7,8 +7,12 @@ async function isMaster(login, gameID) {
     }
 }
 
+let masterFuncAdded = false;
+
 async function addMasterFunc(login, password, gameID) {
     if (!(await isMaster(login, gameID))) return;
+    if (masterFuncAdded) return;
+    masterFuncAdded = true;
     const putChipsButton = document.createElement('button');
     putChipsButton.textContent = 'Поставить фишки';
     putChipsButton.id = 'putLabel';
@@ -69,4 +73,5 @@ function disableMasterFunc() {
 
     const startTurnButton = document.getElementById('startMove');
     if (startTurnButton) startTurnButton.remove();
+    masterFuncAdded = false;
 }
