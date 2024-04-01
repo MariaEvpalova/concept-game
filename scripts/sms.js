@@ -29,38 +29,40 @@ async function sendSMS(message, login, password, gameID) {
 }
 
 function enableSMS(login, password, gameID) {
-    const chatDiv = document.getElementById('chat');
+    if (!document.querySelector('form')) {
+        const chatDiv = document.getElementById('chat');
 
-    const form = document.createElement('form');
-    const messageInput = document.createElement('input');
-    const sendButton = document.createElement('button');
-    const sendIcon = document.createElement('img');
+        const form = document.createElement('form');
+        const messageInput = document.createElement('input');
+        const sendButton = document.createElement('button');
+        const sendIcon = document.createElement('img');
 
-    messageInput.type = 'text';
-    messageInput.id = 'messageInput';
-    messageInput.placeholder = 'Отправить сообщение';
+        messageInput.type = 'text';
+        messageInput.id = 'messageInput';
+        messageInput.placeholder = 'Отправить сообщение';
 
-    sendButton.id = 'sendButton';
+        sendButton.id = 'sendButton';
 
-    sendIcon.src = 'images/send.svg';
-    sendIcon.alt = 'send';
+        sendIcon.src = 'images/send.svg';
+        sendIcon.alt = 'send';
 
-    sendButton.appendChild(sendIcon);
-    form.appendChild(messageInput);
-    form.appendChild(sendButton);
-    chatDiv.appendChild(form);
+        sendButton.appendChild(sendIcon);
+        form.appendChild(messageInput);
+        form.appendChild(sendButton);
+        chatDiv.appendChild(form);
 
-    sendButton.addEventListener('click', function (event) {
-        event.preventDefault();
+        sendButton.addEventListener('click', function (event) {
+            event.preventDefault();
 
-        const message = messageInput.value;
-        if (message.trim() !== '') {
-            sendSMS(message, login, password, gameID);
-            messageInput.value = '';
-        } else {
-            console.log('Message is empty.');
-        }
-    });
+            const message = messageInput.value;
+            if (message.trim() !== '') {
+                sendSMS(message, login, password, gameID);
+                messageInput.value = '';
+            } else {
+                console.log('Message is empty.');
+            }
+        });
+    }
 }
 
 function disableSMS() {

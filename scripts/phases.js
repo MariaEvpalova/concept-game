@@ -26,19 +26,20 @@ async function guessingPhase(login, password, gameID) {
     await displayScore(login, password, gameID);
     await displayAttempts(login, password, gameID);
     removeWaitingScreen();
+    setTimeout(async function () {
+        if (await isMaster(login, gameID)) {
+            addMasterFunc(login, password, gameID);
+            const attempts = await masterAttempts(login, password, gameID);
+            if (attempts == 0 || attempts == 1)
+                displayMasterMessage(login, password, gameID);
+        }
 
-    if (await isMaster(login, gameID)) {
-        addMasterFunc(login, password, gameID);
-        const attempts = await masterAttempts(login, password, gameID);
-        if (attempts == 0 || attempts == 1)
-            displayMasterMessage(login, password, gameID);
-    }
-
-    intervalId = setInterval(async () => {
-        displayChips(login, password, gameID);
-        if ((await currentPhase(gameID)) == 'ideas')
-            ideasPhase(login, password, gameID);
-    }, 1000);
+        intervalId = setInterval(async () => {
+            displayChips(login, password, gameID);
+            if ((await currentPhase(gameID)) == 'ideas')
+                ideasPhase(login, password, gameID);
+        }, 1000);
+    }, 500);
 }
 
 async function beginIdeasPhase(login, password, gameID) {
@@ -59,17 +60,19 @@ async function ideasPhase(login, password, gameID) {
         intervalId = null;
     }
     disableMasterFunc();
-    intervalId = setInterval(async () => {
-        displaySMS(login, password, gameID);
-        if ((await currentPhase(gameID)) == 'guessing')
-            guessingPhase(login, password, gameID);
-    }, 1000);
-    if (!(await isMaster(login, gameID))) {
-        enableSMS(login, password, gameID);
-        addChangeGameStatus(login, password, gameID);
-    } else {
-        displayAttempts(login, password, gameID);
-    }
+    setTimeout(async function () {
+        intervalId = setInterval(async () => {
+            displaySMS(login, password, gameID);
+            if ((await currentPhase(gameID)) == 'guessing')
+                guessingPhase(login, password, gameID);
+        }, 1000);
+        if (!(await isMaster(login, gameID))) {
+            enableSMS(login, password, gameID);
+            addChangeGameStatus(login, password, gameID);
+        } else {
+            displayAttempts(login, password, gameID);
+        }
+    }, 500);
 }
 
 async function exitGame(login, password, gameID) {
@@ -77,9 +80,11 @@ async function exitGame(login, password, gameID) {
         clearInterval(intervalId);
         intervalId = null;
     }
-    const data = await fetchData('leaveGame', [gameID, login, password]);
-    if (Object.keys(data)[0] == 'ERROR') console.log(data['ERROR']);
-    else {
-        displayUserGames(login, password);
-    }
+    setTimeout(async function () {
+        const data = await fetchData('leaveGame', [gameID, login, password]);
+        if (Object.keys(data)[0] == 'ERROR') console.log(data['ERROR']);
+        else {
+            displayUserGames(login, password);
+        }
+    }, 500);
 }
